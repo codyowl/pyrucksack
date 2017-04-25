@@ -1,5 +1,5 @@
 import os
-from settings import PROJECT_PATH as project_path, ROOT_PATH as root_path 
+from settings import PROJECT_PATH as project_path, ROOT_PATH as root_path, TIMER as timer 
 from datetime import datetime
 import shutil
 import sys
@@ -14,6 +14,14 @@ def platform_finder():
     elif "windows" in platform:
         backup_directory_creator(windows=1)
 
+def get_time_and_path(time, path):
+    time_path_dict = ''
+    if len(time) == len(path):
+        time_path_dict = dict(zip(path, time))
+    else:
+        print "path and time are not same size"    
+    return time_path_dict      
+    
 def backup_directory_creator(windows=None, mac=None, linux=None):
     current = datetime.now()
     current_month = datetime.strftime(current, '%b')
@@ -53,6 +61,7 @@ def backup_creator(dst, symlinks=False, ignore=None):
         #         shutil.copy2(source, destination)   
 
 if __name__ == "__main__":
-    directory_name = backup_directory_creator()
-    backup_creator(directory_name, symlinks=None, ignore=None)
+    # directory_name = backup_directory_creator()
+    # backup_creator(directory_name, symlinks=None, ignore=None)
+    # get_time_and_path(timer, project_path)
 
