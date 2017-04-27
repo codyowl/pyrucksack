@@ -11,7 +11,7 @@ def platform_finder():
         backup_directory_creator(linux=1)
     elif "mac" in platform:
         backup_directory_creator(mac=1)
-    elif "windows" in platform:
+    elif "win" in platform:
         backup_directory_creator(windows=1)
 
 def get_time_and_path(time, path):

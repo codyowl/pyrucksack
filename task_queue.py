@@ -12,11 +12,15 @@ celery = Celery('tasks', broker='redis://localhost:6379/0')
 #     pass
 
 
-for value in TIME:
-	hour = TIME.split(':')[0]
-	minute = TIME.split(':')[1]
+def get_hour_and_minute(time):
+	hour = time.split(':')[0]
+	minute = time.split(':')[1]
+	return hour, minute
 	
+def task_queue_creator(time):
+	for t in time:
+		hour, minute = get_hour_and_minute(t)
+		@periodic_task(run_every=crontab(hour=hour, minute=minute, day_of_week="*"))
+		def every_day_backup_task_queue(time):
+			pass
 
-@periodic_task(run_every=crontab(hour=hour, minute=minute, day_of_week="*"))
-def every_day_backup_task_queue():
-    pass
